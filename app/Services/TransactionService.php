@@ -53,7 +53,7 @@ class TransactionService
         return $transaction;
     }
 
-    public function paginatedGetTransactions($businessId, $page = 1, $limit = 10, $status = null, $startDate = null, $endDate = null, $userId = null)
+    public function paginatedGetTransactions($businessId, $page, $limit, $status = null, $startDate = null, $endDate = null, $userId = null)
     {
         $query = Transaction::with(['initiator', 'updated_by'])->orderBy('created_at', 'desc');
 
@@ -204,6 +204,7 @@ class TransactionService
                     'requires_approval' => false,
                     'charges' => 0.0,
                     'transaction_type' => 'income',
+                    'number_of_required_approval' => 0,
                     'initiator_id' => $userUid,
                     'updated_by_id' => $userUid,
                 ]);
