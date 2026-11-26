@@ -26,6 +26,8 @@ class AuthService
              throw new Exception('User with this phone already exists', 400);
         }
 
+        $data['password'] = random_int(100000, 999999); // random 6 digit
+
         return DB::transaction(function () use ($data, $businessId) {
             $uid = (string) Str::uuid();
             $authData = [
